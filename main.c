@@ -28,29 +28,29 @@ void warn(char* fmt, ...)
     va_list args;
     va_start(args, fmt);
     printf("\x1B[33mWARN:  ");
-    vprintf (fmt, args);
-    va_end (args);
+    vprintf(fmt, args);
+    va_end(args);
     printf("\x1B[0m\n");
 }
 
 void error(char* fmt, ...)
 {
     va_list args;
-    va_start (args, fmt);
+    va_start(args, fmt);
     fprintf(stderr, "\x1B[31mERROR: \x1B[31m");
-    vprintf (fmt, args);
-    va_end (args);
-    printf("\x1B[0m\n");
+    vfprintf(stderr, fmt, args);
+    va_end(args);
+    fprintf(stderr, "\x1B[0m\n");
 }
 
 void f_fatal(unsigned long line, char* file, char* fmt, ...)
 {
     va_list args;
-    va_start (args, fmt);
+    va_start(args, fmt);
     fprintf(stderr, "\x1B[31mFATAL ERROR in file %s at line %lu: \x1B[31m\n", file, line);
-    vprintf (fmt, args);
-    va_end (args);
-    printf("\nExiting\x1B[0m\n");
+    vfprintf(stderr, fmt, args);
+    va_end(args);
+    fprintf(stderr, "\nExiting\x1B[0m\n");
 		exit(-1);
 }
 
